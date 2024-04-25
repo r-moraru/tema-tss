@@ -40,6 +40,9 @@ func (n *Node) addBlock(block block.Block) bool {
 	if !ok {
 		return false
 	}
+	if !block.CheckHash() {
+		return false
+	}
 
 	newBlockchain := previousBlockchain.Copy()
 	newBlockchain.AddBlock(block)

@@ -1,0 +1,9 @@
+mode: set
+github.com/r-moraru/tema-TSS/block/block.go:19.61,28.2 3 1
+github.com/r-moraru/tema-TSS/block/block.go:30.34,32.16 2 1
+github.com/r-moraru/tema-TSS/block/block.go:35.2,35.52 1 1
+github.com/r-moraru/tema-TSS/block/block.go:32.16,34.3 1 0
+github.com/r-moraru/tema-TSS/block/block.go:38.50,40.43 2 1
+github.com/r-moraru/tema-TSS/block/block.go:44.2,44.15 1 1
+github.com/r-moraru/tema-TSS/block/block.go:40.43,43.3 2 1
+github.com/r-moraru/tema-TSS/block/block.go:47.34,53.2 5 1
