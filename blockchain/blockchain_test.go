@@ -50,3 +50,33 @@ func TestDoesNotAddBlockWithInvalidPreviousHash(t *testing.T) {
 
 	assert.ErrorIs(t, err, ErrPreviousBlockHashMismatch)
 }
+
+func TestCopyReturnsNewBlockchain(t *testing.T) {
+	blockchain1 := Blockchain{}
+
+	blockchain2 := blockchain1.Copy()
+	block1 := blockchain2.CreateBlock("data1", "00")
+	blockchain2.AddBlock(block1)
+
+	_, err := blockchain1.GetLastBlock()
+	assert.ErrorIs(t, err, ErrEmptyBlockchain)
+	blockchain2LastBlock, err := blockchain2.GetLastBlock()
+	assert.ErrorIs(t, err, nil)
+	assert.Equal(t, block1, blockchain2LastBlock)
+}
+
+func TestCopyReturnsBlockchainWithSameBlocks(t *testing.T) {
+	blockchain1 := Blockchain{}
+	block1 := blockchain1.CreateBlock("data1", "00")
+	blockchain1.AddBlock(block1)
+	block2 := blockchain1.CreateBlock("data2", "00")
+	blockchain1.AddBlock(block2)
+	block3 := blockchain1.CreateBlock("data3", "00")
+	blockchain1.AddBlock(block3)
+
+	blockchain2 := blockchain1.Copy()
+
+	blockchain2LastBlock, err := blockchain2.GetLastBlock()
+	assert.ErrorIs(t, err, nil)
+	assert.Equal(t, block3, blockchain2LastBlock)
+}
