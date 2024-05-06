@@ -8,6 +8,8 @@ import (
 type Network interface {
 	GetBlock(string) chan block.Block
 	GetBlockchain() chan blockchain.Blockchain
+	BlockchainRequest() chan struct{}
 	SendBlock(block.Block)
+	SendBlockchain(blockchain.Blockchain)
 	GetData() chan string
 }

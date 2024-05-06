@@ -3,8 +3,7 @@ package node
 import (
 	"context"
 
-	"github.com/JimWen/gods-generic/queues"
-	"github.com/JimWen/gods-generic/queues/linkedlistqueue"
+	queues "github.com/adrianbrad/queue"
 	"github.com/r-moraru/tema-TSS/block"
 	"github.com/r-moraru/tema-TSS/blockchain"
 	"github.com/r-moraru/tema-TSS/network"
@@ -57,7 +56,7 @@ func NewNode(network network.Network, difficutly string) Node {
 	node.blockchainForks = make(map[string]*blockchain.Blockchain)
 	node.network = network
 	node.difficulty = difficutly
-	node.dataQueue = linkedlistqueue.New[string]()
+	node.dataQueue = queues.NewLinked(make([]string, 0))
 
 	blockchain := <-node.network.GetBlockchain()
 	node.addBlockchain(blockchain)
@@ -67,8 +66,8 @@ func NewNode(network network.Network, difficutly string) Node {
 
 func (n *Node) createBlock() chan block.Block {
 	blockChan := make(chan block.Block)
-	data, ok := n.dataQueue.Dequeue()
-	if !ok {
+	data, err := n.dataQueue.Peek()
+	if err != nil {
 		return blockChan
 	}
 
@@ -100,15 +99,17 @@ func (n *Node) GetLastBlock() *block.Block {
 
 func (n *Node) runIteration() {
 	select {
+	case networkBlockchain := <-n.network.GetBlockchain():
+		n.addBlockchain(networkBlockchain)
 	case networkBlock := <-n.network.GetBlock(n.blockchainLastHash):
 		n.addBlock(networkBlock)
 	case localBlock := <-n.createBlock():
 		n.network.SendBlock(localBlock)
 		n.addBlock(localBlock)
-	case blockchain := <-n.network.GetBlockchain():
-		n.addBlockchain(blockchain)
 	case data := <-n.network.GetData():
-		n.dataQueue.Enqueue(data)
+		n.dataQueue.Offer(data)
+	case <-n.network.BlockchainRequest():
+		n.network.SendBlockchain(*n.blockchainForks[n.blockchainLastHash])
 	}
 }
 

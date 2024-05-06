@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option go_package = "proto/";
+
+package rpc_network;
+
+service RpcNetwork {
+    rpc SendBlock(Block) returns (SendBlockResponse);
+    rpc SendBlockchain(Blockchain) returns (SendBlockchainResponse);
+    rpc GetBlockchain(GetBlockchainMessage) returns (GetBlockchainResponse);
+}
+
+message GetBlockchainMessage {
+    string peerId = 1;
+}
+
+message Block {
+    string data = 1;
+    string previousHash = 2;
+    int64 timestamp = 3;
+    int64 nonce = 4;
+    string hash = 5;
+}
+
+message Blockchain {
+    repeated Block blocks = 1;
+}
+
+message SendBlockResponse {
+    bool accepted = 1;
+}
+
+message SendBlockchainResponse {
+    bool accepted = 1;
+}
+
+message GetBlockchainResponse {
+}

@@ -46,6 +46,7 @@ func (b *Blockchain) CreateBlock(data, difficulty string) block.Block {
 	return block.NewBlock(data, lastBlock.Hash, difficulty)
 }
 
+// TODO: test copy functionality
 func (b *Blockchain) Copy() Blockchain {
 	newBlocks := make([]block.Block, len(b.Blockchain))
 	copy(newBlocks, b.Blockchain)
