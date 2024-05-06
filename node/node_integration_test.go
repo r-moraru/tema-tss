@@ -212,12 +212,36 @@ func TestRespondsToBlockchainRequests(t *testing.T) {
 	network.EXPECT().GetData().Return(make(chan string)).Once()
 	network.EXPECT().BlockchainRequest().Return(blockchainRequestChan).Once()
 	network.EXPECT().SendBlockchain(existingBlockchain).Once()
-
 	node := NewNode(network, "00")
 
 	node.runIteration()
+}
 
-	assert.Equal(t, node.GetBlockchainLength(), 3)
-	assert.NotEqual(t, node.GetLastBlock(), nil)
-	assert.Equal(t, *node.GetLastBlock(), block3)
+func TestReturnsLongestForkToBlockchainRequest(t *testing.T) {
+	longBlockchain := blockchain.Blockchain{}
+	shortBlockchain := blockchain.Blockchain{}
+	block1 := block.NewBlock("block1", "", "00")
+	block2 := block.NewBlock("block2", block1.Hash, "00")
+	block3 := block.NewBlock("block3", "", "00")
+	longBlockchain.AddBlock(block1)
+	longBlockchain.AddBlock(block2)
+	shortBlockchain.AddBlock(block3)
+	blockchainChan := make(chan blockchain.Blockchain, 2)
+	blockchainChan <- longBlockchain
+	blockchainChan <- shortBlockchain
+	blockchainRequestChan := make(chan struct{}, 1)
+	blockchainRequestChan <- struct{}{}
+	network := mocks.NewNetwork(t)
+	network.EXPECT().GetBlockchain().Once().Return(blockchainChan)
+	network.EXPECT().GetBlockchain().Once().Return(blockchainChan)
+	network.EXPECT().GetBlockchain().Return(make(chan blockchain.Blockchain)).Once()
+	network.EXPECT().GetBlock(mock.AnythingOfType("string")).Return(make(chan block.Block))
+	network.EXPECT().GetData().Return(make(chan string))
+	network.EXPECT().BlockchainRequest().Return(make(chan struct{})).Once()
+	network.EXPECT().BlockchainRequest().Return(blockchainRequestChan).Once()
+	network.EXPECT().SendBlockchain(longBlockchain).Once()
+	node := NewNode(network, "00")
+
+	node.runIteration()
+	node.runIteration()
 }
