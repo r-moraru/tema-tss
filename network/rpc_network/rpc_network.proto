@@ -8,6 +8,7 @@ service RpcNetwork {
     rpc SendBlock(Block) returns (SendBlockResponse);
     rpc SendBlockchain(Blockchain) returns (SendBlockchainResponse);
     rpc GetBlockchain(GetBlockchainMessage) returns (GetBlockchainResponse);
+    rpc SendData(Data) returns (SendDataResponse);
 }
 
 message GetBlockchainMessage {
@@ -26,6 +27,10 @@ message Blockchain {
     repeated Block blocks = 1;
 }
 
+message Data {
+    string data = 1;
+}
+
 message SendBlockResponse {
     bool accepted = 1;
 }
@@ -35,4 +40,7 @@ message SendBlockchainResponse {
 }
 
 message GetBlockchainResponse {
+}
+
+message SendDataResponse {
 }

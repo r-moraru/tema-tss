@@ -193,6 +193,53 @@ func (x *Blockchain) GetBlocks() []*Block {
 	return nil
 }
 
+type Data struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Data string `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+}
+
+func (x *Data) Reset() {
+	*x = Data{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_rpc_network_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Data) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Data) ProtoMessage() {}
+
+func (x *Data) ProtoReflect() protoreflect.Message {
+	mi := &file_rpc_network_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Data.ProtoReflect.Descriptor instead.
+func (*Data) Descriptor() ([]byte, []int) {
+	return file_rpc_network_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *Data) GetData() string {
+	if x != nil {
+		return x.Data
+	}
+	return ""
+}
+
 type SendBlockResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -204,7 +251,7 @@ type SendBlockResponse struct {
 func (x *SendBlockResponse) Reset() {
 	*x = SendBlockResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_rpc_network_proto_msgTypes[3]
+		mi := &file_rpc_network_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -217,7 +264,7 @@ func (x *SendBlockResponse) String() string {
 func (*SendBlockResponse) ProtoMessage() {}
 
 func (x *SendBlockResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_rpc_network_proto_msgTypes[3]
+	mi := &file_rpc_network_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -230,7 +277,7 @@ func (x *SendBlockResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendBlockResponse.ProtoReflect.Descriptor instead.
 func (*SendBlockResponse) Descriptor() ([]byte, []int) {
-	return file_rpc_network_proto_rawDescGZIP(), []int{3}
+	return file_rpc_network_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *SendBlockResponse) GetAccepted() bool {
@@ -251,7 +298,7 @@ type SendBlockchainResponse struct {
 func (x *SendBlockchainResponse) Reset() {
 	*x = SendBlockchainResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_rpc_network_proto_msgTypes[4]
+		mi := &file_rpc_network_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -264,7 +311,7 @@ func (x *SendBlockchainResponse) String() string {
 func (*SendBlockchainResponse) ProtoMessage() {}
 
 func (x *SendBlockchainResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_rpc_network_proto_msgTypes[4]
+	mi := &file_rpc_network_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -277,7 +324,7 @@ func (x *SendBlockchainResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendBlockchainResponse.ProtoReflect.Descriptor instead.
 func (*SendBlockchainResponse) Descriptor() ([]byte, []int) {
-	return file_rpc_network_proto_rawDescGZIP(), []int{4}
+	return file_rpc_network_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *SendBlockchainResponse) GetAccepted() bool {
@@ -296,7 +343,7 @@ type GetBlockchainResponse struct {
 func (x *GetBlockchainResponse) Reset() {
 	*x = GetBlockchainResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_rpc_network_proto_msgTypes[5]
+		mi := &file_rpc_network_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -309,7 +356,7 @@ func (x *GetBlockchainResponse) String() string {
 func (*GetBlockchainResponse) ProtoMessage() {}
 
 func (x *GetBlockchainResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_rpc_network_proto_msgTypes[5]
+	mi := &file_rpc_network_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -322,7 +369,45 @@ func (x *GetBlockchainResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetBlockchainResponse.ProtoReflect.Descriptor instead.
 func (*GetBlockchainResponse) Descriptor() ([]byte, []int) {
-	return file_rpc_network_proto_rawDescGZIP(), []int{5}
+	return file_rpc_network_proto_rawDescGZIP(), []int{6}
+}
+
+type SendDataResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *SendDataResponse) Reset() {
+	*x = SendDataResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_rpc_network_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SendDataResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendDataResponse) ProtoMessage() {}
+
+func (x *SendDataResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_rpc_network_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendDataResponse.ProtoReflect.Descriptor instead.
+func (*SendDataResponse) Descriptor() ([]byte, []int) {
+	return file_rpc_network_proto_rawDescGZIP(), []int{7}
 }
 
 var File_rpc_network_proto protoreflect.FileDescriptor
@@ -345,15 +430,18 @@ var file_rpc_network_proto_rawDesc = []byte{
 	0x6f, 0x63, 0x6b, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x12, 0x2a, 0x0a, 0x06, 0x62, 0x6c, 0x6f, 0x63,
 	0x6b, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x72, 0x70, 0x63, 0x5f, 0x6e,
 	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x52, 0x06, 0x62, 0x6c,
-	0x6f, 0x63, 0x6b, 0x73, 0x22, 0x2f, 0x0a, 0x11, 0x53, 0x65, 0x6e, 0x64, 0x42, 0x6c, 0x6f, 0x63,
-	0x6b, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x61, 0x63, 0x63,
-	0x65, 0x70, 0x74, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x08, 0x61, 0x63, 0x63,
-	0x65, 0x70, 0x74, 0x65, 0x64, 0x22, 0x34, 0x0a, 0x16, 0x53, 0x65, 0x6e, 0x64, 0x42, 0x6c, 0x6f,
-	0x63, 0x6b, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
-	0x1a, 0x0a, 0x08, 0x61, 0x63, 0x63, 0x65, 0x70, 0x74, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x08, 0x52, 0x08, 0x61, 0x63, 0x63, 0x65, 0x70, 0x74, 0x65, 0x64, 0x22, 0x17, 0x0a, 0x15, 0x47,
-	0x65, 0x74, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x32, 0xf5, 0x01, 0x0a, 0x0a, 0x52, 0x70, 0x63, 0x4e, 0x65, 0x74, 0x77,
+	0x6f, 0x63, 0x6b, 0x73, 0x22, 0x1a, 0x0a, 0x04, 0x44, 0x61, 0x74, 0x61, 0x12, 0x12, 0x0a, 0x04,
+	0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61,
+	0x22, 0x2f, 0x0a, 0x11, 0x53, 0x65, 0x6e, 0x64, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x61, 0x63, 0x63, 0x65, 0x70, 0x74, 0x65,
+	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x08, 0x61, 0x63, 0x63, 0x65, 0x70, 0x74, 0x65,
+	0x64, 0x22, 0x34, 0x0a, 0x16, 0x53, 0x65, 0x6e, 0x64, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x63, 0x68,
+	0x61, 0x69, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x61,
+	0x63, 0x63, 0x65, 0x70, 0x74, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x08, 0x61,
+	0x63, 0x63, 0x65, 0x70, 0x74, 0x65, 0x64, 0x22, 0x17, 0x0a, 0x15, 0x47, 0x65, 0x74, 0x42, 0x6c,
+	0x6f, 0x63, 0x6b, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x22, 0x12, 0x0a, 0x10, 0x53, 0x65, 0x6e, 0x64, 0x44, 0x61, 0x74, 0x61, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x32, 0xb3, 0x02, 0x0a, 0x0a, 0x52, 0x70, 0x63, 0x4e, 0x65, 0x74, 0x77,
 	0x6f, 0x72, 0x6b, 0x12, 0x3f, 0x0a, 0x09, 0x53, 0x65, 0x6e, 0x64, 0x42, 0x6c, 0x6f, 0x63, 0x6b,
 	0x12, 0x12, 0x2e, 0x72, 0x70, 0x63, 0x5f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x42,
 	0x6c, 0x6f, 0x63, 0x6b, 0x1a, 0x1e, 0x2e, 0x72, 0x70, 0x63, 0x5f, 0x6e, 0x65, 0x74, 0x77, 0x6f,
@@ -368,8 +456,12 @@ var file_rpc_network_proto_rawDesc = []byte{
 	0x6f, 0x72, 0x6b, 0x2e, 0x47, 0x65, 0x74, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x63, 0x68, 0x61, 0x69,
 	0x6e, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x1a, 0x22, 0x2e, 0x72, 0x70, 0x63, 0x5f, 0x6e,
 	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x47, 0x65, 0x74, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x63,
-	0x68, 0x61, 0x69, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x08, 0x5a, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x68, 0x61, 0x69, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3c, 0x0a, 0x08,
+	0x53, 0x65, 0x6e, 0x64, 0x44, 0x61, 0x74, 0x61, 0x12, 0x11, 0x2e, 0x72, 0x70, 0x63, 0x5f, 0x6e,
+	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x44, 0x61, 0x74, 0x61, 0x1a, 0x1d, 0x2e, 0x72, 0x70,
+	0x63, 0x5f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x53, 0x65, 0x6e, 0x64, 0x44, 0x61,
+	0x74, 0x61, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x08, 0x5a, 0x06, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x2f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -384,25 +476,29 @@ func file_rpc_network_proto_rawDescGZIP() []byte {
 	return file_rpc_network_proto_rawDescData
 }
 
-var file_rpc_network_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_rpc_network_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_rpc_network_proto_goTypes = []interface{}{
 	(*GetBlockchainMessage)(nil),   // 0: rpc_network.GetBlockchainMessage
 	(*Block)(nil),                  // 1: rpc_network.Block
 	(*Blockchain)(nil),             // 2: rpc_network.Blockchain
-	(*SendBlockResponse)(nil),      // 3: rpc_network.SendBlockResponse
-	(*SendBlockchainResponse)(nil), // 4: rpc_network.SendBlockchainResponse
-	(*GetBlockchainResponse)(nil),  // 5: rpc_network.GetBlockchainResponse
+	(*Data)(nil),                   // 3: rpc_network.Data
+	(*SendBlockResponse)(nil),      // 4: rpc_network.SendBlockResponse
+	(*SendBlockchainResponse)(nil), // 5: rpc_network.SendBlockchainResponse
+	(*GetBlockchainResponse)(nil),  // 6: rpc_network.GetBlockchainResponse
+	(*SendDataResponse)(nil),       // 7: rpc_network.SendDataResponse
 }
 var file_rpc_network_proto_depIdxs = []int32{
 	1, // 0: rpc_network.Blockchain.blocks:type_name -> rpc_network.Block
 	1, // 1: rpc_network.RpcNetwork.SendBlock:input_type -> rpc_network.Block
 	2, // 2: rpc_network.RpcNetwork.SendBlockchain:input_type -> rpc_network.Blockchain
 	0, // 3: rpc_network.RpcNetwork.GetBlockchain:input_type -> rpc_network.GetBlockchainMessage
-	3, // 4: rpc_network.RpcNetwork.SendBlock:output_type -> rpc_network.SendBlockResponse
-	4, // 5: rpc_network.RpcNetwork.SendBlockchain:output_type -> rpc_network.SendBlockchainResponse
-	5, // 6: rpc_network.RpcNetwork.GetBlockchain:output_type -> rpc_network.GetBlockchainResponse
-	4, // [4:7] is the sub-list for method output_type
-	1, // [1:4] is the sub-list for method input_type
+	3, // 4: rpc_network.RpcNetwork.SendData:input_type -> rpc_network.Data
+	4, // 5: rpc_network.RpcNetwork.SendBlock:output_type -> rpc_network.SendBlockResponse
+	5, // 6: rpc_network.RpcNetwork.SendBlockchain:output_type -> rpc_network.SendBlockchainResponse
+	6, // 7: rpc_network.RpcNetwork.GetBlockchain:output_type -> rpc_network.GetBlockchainResponse
+	7, // 8: rpc_network.RpcNetwork.SendData:output_type -> rpc_network.SendDataResponse
+	5, // [5:9] is the sub-list for method output_type
+	1, // [1:5] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
 	1, // [1:1] is the sub-list for extension extendee
 	0, // [0:1] is the sub-list for field type_name
@@ -451,7 +547,7 @@ func file_rpc_network_proto_init() {
 			}
 		}
 		file_rpc_network_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SendBlockResponse); i {
+			switch v := v.(*Data); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -463,7 +559,7 @@ func file_rpc_network_proto_init() {
 			}
 		}
 		file_rpc_network_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SendBlockchainResponse); i {
+			switch v := v.(*SendBlockResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -475,7 +571,31 @@ func file_rpc_network_proto_init() {
 			}
 		}
 		file_rpc_network_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SendBlockchainResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_rpc_network_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetBlockchainResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_rpc_network_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SendDataResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -493,7 +613,7 @@ func file_rpc_network_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_rpc_network_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

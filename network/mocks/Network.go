@@ -277,6 +277,70 @@ func (_c *Network_SendBlockchain_Call) RunAndReturn(run func(blockchain.Blockcha
 	return _c
 }
 
+// SendBlockchainRequest provides a mock function with given fields:
+func (_m *Network) SendBlockchainRequest() {
+	_m.Called()
+}
+
+// Network_SendBlockchainRequest_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'SendBlockchainRequest'
+type Network_SendBlockchainRequest_Call struct {
+	*mock.Call
+}
+
+// SendBlockchainRequest is a helper method to define mock.On call
+func (_e *Network_Expecter) SendBlockchainRequest() *Network_SendBlockchainRequest_Call {
+	return &Network_SendBlockchainRequest_Call{Call: _e.mock.On("SendBlockchainRequest")}
+}
+
+func (_c *Network_SendBlockchainRequest_Call) Run(run func()) *Network_SendBlockchainRequest_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run()
+	})
+	return _c
+}
+
+func (_c *Network_SendBlockchainRequest_Call) Return() *Network_SendBlockchainRequest_Call {
+	_c.Call.Return()
+	return _c
+}
+
+func (_c *Network_SendBlockchainRequest_Call) RunAndReturn(run func()) *Network_SendBlockchainRequest_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// Stop provides a mock function with given fields:
+func (_m *Network) Stop() {
+	_m.Called()
+}
+
+// Network_Stop_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'Stop'
+type Network_Stop_Call struct {
+	*mock.Call
+}
+
+// Stop is a helper method to define mock.On call
+func (_e *Network_Expecter) Stop() *Network_Stop_Call {
+	return &Network_Stop_Call{Call: _e.mock.On("Stop")}
+}
+
+func (_c *Network_Stop_Call) Run(run func()) *Network_Stop_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run()
+	})
+	return _c
+}
+
+func (_c *Network_Stop_Call) Return() *Network_Stop_Call {
+	_c.Call.Return()
+	return _c
+}
+
+func (_c *Network_Stop_Call) RunAndReturn(run func()) *Network_Stop_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // NewNetwork creates a new instance of Network. It also registers a testing interface on the mock and a cleanup function to assert the mocks expectations.
 // The first argument is typically a *testing.T value.
 func NewNetwork(t interface {

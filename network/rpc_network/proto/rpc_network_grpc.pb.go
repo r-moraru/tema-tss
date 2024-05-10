@@ -22,6 +22,7 @@ const (
 	RpcNetwork_SendBlock_FullMethodName      = "/rpc_network.RpcNetwork/SendBlock"
 	RpcNetwork_SendBlockchain_FullMethodName = "/rpc_network.RpcNetwork/SendBlockchain"
 	RpcNetwork_GetBlockchain_FullMethodName  = "/rpc_network.RpcNetwork/GetBlockchain"
+	RpcNetwork_SendData_FullMethodName       = "/rpc_network.RpcNetwork/SendData"
 )
 
 // RpcNetworkClient is the client API for RpcNetwork service.
@@ -31,6 +32,7 @@ type RpcNetworkClient interface {
 	SendBlock(ctx context.Context, in *Block, opts ...grpc.CallOption) (*SendBlockResponse, error)
 	SendBlockchain(ctx context.Context, in *Blockchain, opts ...grpc.CallOption) (*SendBlockchainResponse, error)
 	GetBlockchain(ctx context.Context, in *GetBlockchainMessage, opts ...grpc.CallOption) (*GetBlockchainResponse, error)
+	SendData(ctx context.Context, in *Data, opts ...grpc.CallOption) (*SendDataResponse, error)
 }
 
 type rpcNetworkClient struct {
@@ -68,6 +70,15 @@ func (c *rpcNetworkClient) GetBlockchain(ctx context.Context, in *GetBlockchainM
 	return out, nil
 }
 
+func (c *rpcNetworkClient) SendData(ctx context.Context, in *Data, opts ...grpc.CallOption) (*SendDataResponse, error) {
+	out := new(SendDataResponse)
+	err := c.cc.Invoke(ctx, RpcNetwork_SendData_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // RpcNetworkServer is the server API for RpcNetwork service.
 // All implementations must embed UnimplementedRpcNetworkServer
 // for forward compatibility
@@ -75,6 +86,7 @@ type RpcNetworkServer interface {
 	SendBlock(context.Context, *Block) (*SendBlockResponse, error)
 	SendBlockchain(context.Context, *Blockchain) (*SendBlockchainResponse, error)
 	GetBlockchain(context.Context, *GetBlockchainMessage) (*GetBlockchainResponse, error)
+	SendData(context.Context, *Data) (*SendDataResponse, error)
 	mustEmbedUnimplementedRpcNetworkServer()
 }
 
@@ -90,6 +102,9 @@ func (UnimplementedRpcNetworkServer) SendBlockchain(context.Context, *Blockchain
 }
 func (UnimplementedRpcNetworkServer) GetBlockchain(context.Context, *GetBlockchainMessage) (*GetBlockchainResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBlockchain not implemented")
+}
+func (UnimplementedRpcNetworkServer) SendData(context.Context, *Data) (*SendDataResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendData not implemented")
 }
 func (UnimplementedRpcNetworkServer) mustEmbedUnimplementedRpcNetworkServer() {}
 
@@ -158,6 +173,24 @@ func _RpcNetwork_GetBlockchain_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _RpcNetwork_SendData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Data)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RpcNetworkServer).SendData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RpcNetwork_SendData_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RpcNetworkServer).SendData(ctx, req.(*Data))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // RpcNetwork_ServiceDesc is the grpc.ServiceDesc for RpcNetwork service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -176,6 +209,10 @@ var RpcNetwork_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetBlockchain",
 			Handler:    _RpcNetwork_GetBlockchain_Handler,
+		},
+		{
+			MethodName: "SendData",
+			Handler:    _RpcNetwork_SendData_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
