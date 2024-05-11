@@ -59,9 +59,12 @@ func (r *RpcServer) SendBlockchain(ctx context.Context, req *pb.Blockchain) (*pb
 			Nonce:         protoBlock.GetNonce(),
 			Hash:          protoBlock.GetHash(),
 		}
-		newBlockchain.AddBlock(newBlock)
+		if newBlockchain.AddBlock(newBlock) != nil {
+			return res, nil
+		}
 	}
 
+	res.Accepted = true
 	r.BlockchainQueue.Offer(newBlockchain)
 
 	return res, nil
@@ -78,6 +81,7 @@ func RunRpcServer(port int) (*RpcServer, func(), error) {
 		BlockQueue:               queue.NewLinked([]block.Block{}),
 		BlockchainQueue:          queue.NewLinked([]*blockchain.Blockchain{}),
 		BlockchainRequestPeerIds: queue.NewLinked([]string{}),
+		DataQueue:                queue.NewLinked([]string{}),
 	}
 	pb.RegisterRpcNetworkServer(s, &rpcServer)
 	stopServerCallback := func() {
