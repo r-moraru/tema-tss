@@ -1,8 +1,8 @@
 ## Rularea testelor + coverage
 
 - Pentru rularea tuturor testelor + coverage: din root-ul proiectului: `go test ./... -coverprofile=c.out`
-- Afisarea in browser a reportului de coverage: `go tool cover -html=c.out`
-![Rezultatele de coverage in browser](image-1.png)
+- Afisarea in browser a reportului de coverage: `go tool cover -html=c.out` (obs: fisierele autogenerate sunt cele cu coverage scazut)
+![Coverage report](image.png)
 
 ## Arhitectura proiectului
 
@@ -34,6 +34,7 @@
     - Citirea request-urilor de adaugare de date in blockchain de la retea (`GetData`)
 
 ### Implementarea retelei: RPC network
+![diagrama implementare](implementation_diagram.png)
 
 #### RPC server
 
@@ -57,3 +58,9 @@
 - `Node` si `RpcNetwork` cuprind mai multe componente
 - Testele pentru `Node` mock-uiesc reteaua si verifica comunicarea cu aceasta, crearea blocurilor si trimiterea lor, si management-ul de fork-uri.
 - Testele pentru `RpcNetwork` mock-uiesc clientii RPC pentru peers si testeaza comunicarea cu ei, integrarea cu `RpcServer`, si initializarea retelei.
+
+## Referinte
+
+[1] Nakamoto, Satoshi, "Bitcoin: A Peer-to-Peer Electronic Cash System", https://bitcoin.org/bitcoin.pdf, Data ultimei accesari: 18.04.2024
+[2] Mockery docs, https://docs.mockery.io/en/latest/, Data ultimei accesari: 11.05.2024
+[3] gRPC docs, https://grpc.io/docs/, Data ultimei accesari: 11.05.2024
