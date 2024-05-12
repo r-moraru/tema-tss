@@ -1,6 +1,9 @@
 package node
 
 import (
+    "github.com/r-moraru/tema-TSS/block"
+	"github.com/r-moraru/tema-TSS/blockchain"
+
     "context"
     "testing"
 )

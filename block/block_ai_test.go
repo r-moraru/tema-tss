@@ -2,6 +2,7 @@ package block
 
 import (
 	"testing"
+	"strings"
 )
 
 func TestNewBlock(t *testing.T) {
