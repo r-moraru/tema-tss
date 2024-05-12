@@ -58,8 +58,8 @@
 ## Teste de integrare
 
 - `Node` si `RpcNetwork` cuprind mai multe componente
-- Testele pentru `Node` mock-uiesc reteaua si verifica comunicarea cu aceasta, crearea blocurilor si trimiterea lor, si management-ul de fork-uri.
-- Testele pentru `RpcNetwork` mock-uiesc clientii RPC pentru peers si testeaza comunicarea cu ei, integrarea cu `RpcServer`, si initializarea retelei.
+- Testele pentru `Node` creeaza date simulate (mock data) in retea si verifica comunicarea cu aceasta, crearea blocurilor si trimiterea lor, si management-ul de fork-uri.
+- Testele pentru `RpcNetwork` creeaza date simulate (mock data) pentru clientii RPC ca peers si testeaza comunicarea cu ei, integrarea cu `RpcServer`, si initializarea retelei.
 
 ## Referinte
 
