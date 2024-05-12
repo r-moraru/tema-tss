@@ -58,6 +58,7 @@ func NewNode(network network.Network, difficutly string) Node {
 	node.difficulty = difficutly
 	node.dataQueue = queues.NewLinked(make([]string, 0))
 
+	node.network.SendBlockchainRequest()
 	blockchain := <-node.network.GetBlockchain()
 	node.addBlockchain(blockchain)
 

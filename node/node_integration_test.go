@@ -14,6 +14,7 @@ func TestNewNodeCreatedWhenBlockchainIsEmpty(t *testing.T) {
 	blockchainChan := make(chan blockchain.Blockchain, 1)
 	blockchainChan <- blockchain.Blockchain{}
 	network := mocks.NewNetwork(t)
+	network.EXPECT().SendBlockchainRequest().Once()
 	network.EXPECT().GetBlockchain().Once().Return(blockchainChan)
 
 	node := NewNode(network, "0000")
@@ -33,6 +34,7 @@ func TestNewNodeCreatedWhenBlockchainIsPopulated(t *testing.T) {
 	blockchainChan := make(chan blockchain.Blockchain, 1)
 	blockchainChan <- existingBlockchain
 	network := mocks.NewNetwork(t)
+	network.EXPECT().SendBlockchainRequest().Once()
 	network.EXPECT().GetBlockchain().Once().Return(blockchainChan)
 
 	node := NewNode(network, "00")
@@ -49,6 +51,7 @@ func TestCanAddFirstBlockFromNetwork(t *testing.T) {
 	blockchainChan := make(chan blockchain.Blockchain, 1)
 	blockchainChan <- blockchain.Blockchain{}
 	network := mocks.NewNetwork(t)
+	network.EXPECT().SendBlockchainRequest().Once()
 	network.EXPECT().GetBlockchain().Return(blockchainChan)
 	network.EXPECT().GetBlock("").Once().Return(blockChan)
 	network.EXPECT().GetData().Return(make(chan string))
@@ -70,6 +73,7 @@ func TestCanAddSecondBlockFromNetwork(t *testing.T) {
 	blockchainChan := make(chan blockchain.Blockchain, 1)
 	blockchainChan <- blockchain.Blockchain{}
 	network := mocks.NewNetwork(t)
+	network.EXPECT().SendBlockchainRequest().Once()
 	network.EXPECT().GetBlockchain().Return(blockchainChan)
 	network.EXPECT().GetBlock("").Once().Return(blockChan)
 	network.EXPECT().GetBlock(block1.Hash).Once().Return(blockChan)
@@ -91,6 +95,7 @@ func TestCanCreateBlockIfFirst(t *testing.T) {
 	data := "test data"
 	dataChannel <- data
 	network := mocks.NewNetwork(t)
+	network.EXPECT().SendBlockchainRequest().Once()
 	network.EXPECT().GetBlockchain().Return(blockchainChan).Once()
 	network.EXPECT().GetBlockchain().Return(make(chan blockchain.Blockchain))
 	network.EXPECT().GetBlock("").Return(make(chan block.Block))
@@ -118,6 +123,7 @@ func TestIgnoresBlockWithBadHashFromNetwork(t *testing.T) {
 	blockChan := make(chan block.Block, 1)
 	blockChan <- block2
 	network := mocks.NewNetwork(t)
+	network.EXPECT().SendBlockchainRequest().Once()
 	network.EXPECT().GetBlockchain().Return(blockchainChan).Once()
 	network.EXPECT().GetBlockchain().Return(make(chan blockchain.Blockchain))
 	network.EXPECT().GetBlock(block1.Hash).Return(blockChan).Once()
@@ -143,6 +149,7 @@ func TestIgnoresBlockWithBadPreviousHashFromNetwork(t *testing.T) {
 	blockChan := make(chan block.Block, 1)
 	blockChan <- block2
 	network := mocks.NewNetwork(t)
+	network.EXPECT().SendBlockchainRequest().Once()
 	network.EXPECT().GetBlockchain().Return(blockchainChan).Once()
 	network.EXPECT().GetBlockchain().Return(make(chan blockchain.Blockchain))
 	network.EXPECT().GetBlock(block1.Hash).Return(blockChan).Once()
@@ -170,6 +177,7 @@ func TestAcceptsNewBlockchainFromNetwork(t *testing.T) {
 	blockchainChan2 := make(chan blockchain.Blockchain, 1)
 	blockchainChan2 <- existingBlockchain
 	network := mocks.NewNetwork(t)
+	network.EXPECT().SendBlockchainRequest().Once()
 	network.EXPECT().GetBlockchain().Return(blockchainChan1).Once()
 	network.EXPECT().GetBlockchain().Return(blockchainChan2).Once()
 	network.EXPECT().GetBlock("").Return(make(chan block.Block))
@@ -187,6 +195,7 @@ func TestGetLastBlockReturnsNilIfBlockchainIsEmpty(t *testing.T) {
 	blockchainChan := make(chan blockchain.Blockchain, 1)
 	blockchainChan <- blockchain.Blockchain{}
 	network := mocks.NewNetwork(t)
+	network.EXPECT().SendBlockchainRequest().Once()
 	network.EXPECT().GetBlockchain().Once().Return(blockchainChan)
 	node := NewNode(network, "0000")
 
@@ -206,6 +215,7 @@ func TestRespondsToBlockchainRequests(t *testing.T) {
 	blockchainRequestChan := make(chan struct{}, 1)
 	blockchainRequestChan <- struct{}{}
 	network := mocks.NewNetwork(t)
+	network.EXPECT().SendBlockchainRequest().Once()
 	network.EXPECT().GetBlockchain().Once().Return(blockchainChan)
 	network.EXPECT().GetBlockchain().Return(make(chan blockchain.Blockchain)).Once()
 	network.EXPECT().GetBlock(block3.Hash).Return(make(chan block.Block)).Once()
@@ -232,6 +242,7 @@ func TestReturnsLongestForkToBlockchainRequest(t *testing.T) {
 	blockchainRequestChan := make(chan struct{}, 1)
 	blockchainRequestChan <- struct{}{}
 	network := mocks.NewNetwork(t)
+	network.EXPECT().SendBlockchainRequest().Once()
 	network.EXPECT().GetBlockchain().Once().Return(blockchainChan)
 	network.EXPECT().GetBlockchain().Once().Return(blockchainChan)
 	network.EXPECT().GetBlockchain().Return(make(chan blockchain.Blockchain)).Once()
