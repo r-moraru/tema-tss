@@ -50,17 +50,21 @@
 
 ## Teste unitare
 
-- Teste unitare au fost scrise pentru clasele de baza (`Block`, `Blockchain`, `RpcServer`)
+- Teste unitare au fost scrise pentru clasele de baza (`Block`, `Blockchain`, `RpcServer`).
 - Testele pentru `Block` (`block/block_test.go`) testeaza initializarea, minarea si validarea blocurilor.
-- Testele pentru `Blockchain` (`blockchain/blockchain_test.go`) testeaza adaugarea de blocuri noi in diferite circumstante (blocuri valide/invalide), si utilitarele (`GetBlockchainLength`, `GetLastBlock`, `Copy`)
-- Testele pentru `RpcServer` testeaza initializarea serverului, si implementarea metodelor (primirea de date valide/invalide)
+- Testele pentru `Blockchain` (`blockchain/blockchain_test.go`) testeaza adaugarea de blocuri noi in diferite circumstante (blocuri valide/invalide), si utilitarele (`GetBlockchainLength`, `GetLastBlock`, `Copy`).
+- Testele pentru `RpcServer` testeaza initializarea serverului, si implementarea metodelor (primirea de date valide/invalide).
 
 ## Teste de integrare
 
-- `Node` si `RpcNetwork` cuprind mai multe componente
+- `Node` si `RpcNetwork` cuprind mai multe componente.
 - Testele pentru `Node` creeaza date simulate (mock data) in retea si verifica comunicarea cu aceasta, crearea blocurilor si trimiterea lor, si management-ul de fork-uri.
 - Testele pentru `RpcNetwork` creeaza date simulate (mock data) pentru clientii RPC ca peers si testeaza comunicarea cu ei, integrarea cu `RpcServer`, si initializarea retelei.
 
+## Teste generate cu AI
+
+- Testele au fost scrise pentru clasele (`Block`, `Blockchain`, `RpcServer` si `Node`).
+- Testele generate cu AI testeaza initiliazarea claselor, validitatea claselor create si implementarea metodelor.
 ## Referinte
 
 [1] Nakamoto, Satoshi, "Bitcoin: A Peer-to-Peer Electronic Cash System", https://bitcoin.org/bitcoin.pdf, Data ultimei accesari: 18.04.2024
