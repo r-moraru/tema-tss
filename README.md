@@ -71,6 +71,9 @@
 - Testele au un coverage limitat.
 - Testul pentru nod apeleaza metoda Run a nodului fara a avea un sistem de cancel, testul ruland la infinit.
 
+## Prezentare PowerPoint
+https://docs.google.com/presentation/d/1XDaEATglyGRG6fClNNSMX7SHIscp6aS0/edit?usp=drive_link&ouid=101929689209003707993&rtpof=true&sd=true
+
 ## Referinte
 
 [1] Nakamoto, Satoshi, "Bitcoin: A Peer-to-Peer Electronic Cash System", https://bitcoin.org/bitcoin.pdf, Data ultimei accesari: 18.04.2024
