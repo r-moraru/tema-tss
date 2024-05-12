@@ -23,11 +23,11 @@ func NewBlock(data, previous_hash, difficulty string) Block {
 		Timestamp:     time.Now().UnixMicro(),
 		Nonce:         0,
 	}
-	block.calculateHash(difficulty)
+	block.CalculateHash(difficulty)
 	return block
 }
 
-func (b *Block) getHash() string {
+func (b *Block) GetHash() string {
 	jsonBytes, err := json.Marshal(b)
 	if err != nil {
 		return ""
@@ -35,11 +35,11 @@ func (b *Block) getHash() string {
 	return fmt.Sprintf("%x", sha256.Sum256(jsonBytes))
 }
 
-func (b *Block) calculateHash(difficulty string) {
-	hash := b.getHash()
+func (b *Block) CalculateHash(difficulty string) {
+	hash := b.GetHash()
 	for !strings.HasPrefix(hash, difficulty) {
 		b.Nonce++
-		hash = b.getHash()
+		hash = b.GetHash()
 	}
 	b.Hash = hash
 }
@@ -47,7 +47,7 @@ func (b *Block) calculateHash(difficulty string) {
 func (b *Block) CheckHash() bool {
 	declaredHash := b.Hash
 	b.Hash = ""
-	expectedHash := b.getHash()
+	expectedHash := b.GetHash()
 	b.Hash = declaredHash
 	return declaredHash == expectedHash
 }

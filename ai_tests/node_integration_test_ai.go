@@ -1,4 +1,4 @@
-package node
+package ai_tests
 
 import (
 	"github.com/r-moraru/tema-TSS/block"

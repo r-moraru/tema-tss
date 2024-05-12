@@ -1,4 +1,4 @@
-package server
+package ai_tests
 
 import (
 	"context"
@@ -7,12 +7,13 @@ import (
 	"time"
 
 	pb "github.com/r-moraru/tema-TSS/network/rpc_network/proto"
+	"github.com/r-moraru/tema-TSS/network/rpc_network/server"
 	"google.golang.org/grpc"
 )
 
 func TestRpcServerInitialization(t *testing.T) {
 	port := 50051
-	_, stopServer, err := RunRpcServer(port)
+	_, stopServer, err := server.RunRpcServer(port)
 	if err != nil {
 		t.Fatalf("Error starting RpcServer: %v", err)
 	}
@@ -28,7 +29,7 @@ func TestRpcServerInitialization(t *testing.T) {
 
 func TestSendBlock(t *testing.T) {
 	port := 50052
-	_, stopServer, err := RunRpcServer(port)
+	_, stopServer, err := server.RunRpcServer(port)
 	if err != nil {
 		t.Fatalf("Error starting RpcServer: %v", err)
 	}
@@ -66,7 +67,7 @@ func TestSendBlock(t *testing.T) {
 
 func TestSendBlockchain(t *testing.T) {
 	port := 50053
-	_, stopServer, err := RunRpcServer(port)
+	_, stopServer, err := server.RunRpcServer(port)
 	if err != nil {
 		t.Fatalf("Error starting RpcServer: %v", err)
 	}

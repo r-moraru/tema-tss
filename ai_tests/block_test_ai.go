@@ -1,8 +1,10 @@
-package block
+package ai_tests
 
 import (
 	"strings"
 	"testing"
+
+	"github.com/r-moraru/tema-TSS/block"
 )
 
 func TestNewBlock(t *testing.T) {
@@ -10,7 +12,7 @@ func TestNewBlock(t *testing.T) {
 	previousHash := "Previous Hash"
 	difficulty := "00000" // Example difficulty
 
-	block := NewBlock(data, previousHash, difficulty)
+	block := block.NewBlock(data, previousHash, difficulty)
 
 	// Check if the block's data is set correctly
 	if block.Data != data {
@@ -33,9 +35,9 @@ func TestCalculateHash(t *testing.T) {
 	previousHash := "Previous Hash"
 	difficulty := "00000" // Example difficulty
 
-	block := NewBlock(data, previousHash, difficulty)
+	block := block.NewBlock(data, previousHash, difficulty)
 
-	block.calculateHash(difficulty)
+	block.CalculateHash(difficulty)
 
 	// Check if the block's hash is calculated correctly
 	if !strings.HasPrefix(block.Hash, difficulty) {
@@ -48,7 +50,7 @@ func TestCheckHash(t *testing.T) {
 	previousHash := "Previous Hash"
 	difficulty := "00000" // Example difficulty
 
-	block := NewBlock(data, previousHash, difficulty)
+	block := block.NewBlock(data, previousHash, difficulty)
 
 	// Store the original hash
 	originalHash := block.Hash

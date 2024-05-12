@@ -1,14 +1,15 @@
-package blockchain
+package ai_tests
 
 import (
 	"testing"
 
 	"github.com/r-moraru/tema-TSS/block"
+	"github.com/r-moraru/tema-TSS/blockchain"
 )
 
 func TestAddValidBlock(t *testing.T) {
 	// Create a new blockchain
-	bc := Blockchain{}
+	bc := blockchain.Blockchain{}
 
 	// Add a valid block
 	validBlock := block.NewBlock("Test Data", "", "00000")
@@ -27,7 +28,7 @@ func TestAddValidBlock(t *testing.T) {
 
 func TestAddInvalidBlock(t *testing.T) {
 	// Create a new blockchain
-	bc := Blockchain{}
+	bc := blockchain.Blockchain{}
 
 	// Add an invalid block (invalid hash)
 	invalidBlock := block.Block{
@@ -40,7 +41,7 @@ func TestAddInvalidBlock(t *testing.T) {
 	err := bc.AddBlock(invalidBlock)
 
 	// Check if the error matches the expected error
-	if err != ErrBlockInvalidHash {
+	if err != blockchain.ErrBlockInvalidHash {
 		t.Errorf("Expected ErrBlockInvalidHash, got: %v", err)
 	}
 
@@ -52,13 +53,13 @@ func TestAddInvalidBlock(t *testing.T) {
 
 func TestGetLastBlock(t *testing.T) {
 	// Create a new blockchain
-	bc := Blockchain{}
+	bc := blockchain.Blockchain{}
 
 	// Get last block when blockchain is empty
 	_, err := bc.GetLastBlock()
 
 	// Check if the error matches the expected error
-	if err != ErrEmptyBlockchain {
+	if err != blockchain.ErrBlockInvalidHash {
 		t.Errorf("Expected ErrEmptyBlockchain, got: %v", err)
 	}
 
@@ -82,7 +83,7 @@ func TestGetLastBlock(t *testing.T) {
 
 func TestCopyBlockchain(t *testing.T) {
 	// Create a new blockchain
-	bc := Blockchain{}
+	bc := blockchain.Blockchain{}
 
 	// Add a valid block
 	validBlock := block.NewBlock("Test Data", "", "00000")
