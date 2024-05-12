@@ -3,21 +3,16 @@ package server
 import (
 	"context"
 	"fmt"
-	"net"
-	"strconv"
 	"testing"
 	"time"
 
-	"github.com/adrianbrad/queue"
-	"github.com/r-moraru/tema-TSS/block"
-	"github.com/r-moraru/tema-TSS/blockchain"
 	pb "github.com/r-moraru/tema-TSS/network/rpc_network/proto"
 	"google.golang.org/grpc"
 )
 
 func TestRpcServerInitialization(t *testing.T) {
 	port := 50051
-	server, stopServer, err := RunRpcServer(port)
+	_, stopServer, err := RunRpcServer(port)
 	if err != nil {
 		t.Fatalf("Error starting RpcServer: %v", err)
 	}
@@ -33,7 +28,7 @@ func TestRpcServerInitialization(t *testing.T) {
 
 func TestSendBlock(t *testing.T) {
 	port := 50052
-	server, stopServer, err := RunRpcServer(port)
+	_, stopServer, err := RunRpcServer(port)
 	if err != nil {
 		t.Fatalf("Error starting RpcServer: %v", err)
 	}
@@ -71,7 +66,7 @@ func TestSendBlock(t *testing.T) {
 
 func TestSendBlockchain(t *testing.T) {
 	port := 50053
-	server, stopServer, err := RunRpcServer(port)
+	_, stopServer, err := RunRpcServer(port)
 	if err != nil {
 		t.Fatalf("Error starting RpcServer: %v", err)
 	}
