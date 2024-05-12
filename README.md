@@ -63,8 +63,14 @@
 
 ## Teste generate cu AI
 
+- Testele au fost generate cu ChatGPT.
 - Testele au fost scrise pentru clasele (`Block`, `Blockchain`, `RpcServer` si `Node`).
 - Testele generate cu AI testeaza initiliazarea claselor, validitatea claselor create si implementarea metodelor.
+- De exemplu, 'TestCopyBlockchain' incearca sa verifice daca adaugarea unui bloc in copiia unui blockchain nu afecteaza varainta originala, insa testul adauga un block invalid la copie. Astfel blockchain-urile raman identice, iar assertion-ul pentru egalitate va pica.
+- O parte din teste nu compileaza si nu inteleg contextul aplicatiei.
+- Testele au un coverage limitat.
+- Testul pentru nod apeleaza metoda Run a nodului fara a avea un sistem de cancel, testul ruland la infinit.
+
 ## Referinte
 
 [1] Nakamoto, Satoshi, "Bitcoin: A Peer-to-Peer Electronic Cash System", https://bitcoin.org/bitcoin.pdf, Data ultimei accesari: 18.04.2024
