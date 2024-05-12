@@ -44,6 +44,8 @@
 #### RPC network
 
 - `RpcNetwork`, definit in `network/rpc_network/rpc_network.go`, implementeaza interfata de retea si defineste metode utilitare pentru pornirea retelei (`NewRpcNetwork`, `BuildPeerMap`).
+- In retea, nodurile au Id pentru a putea fi identificate. Id-urile si clientii RPC pentru peers sunt gasite in `peerMap`.
+- Request-urile sunt primite prin `RpcServer` si trimise prin clientii din `peerMap`.
 - O observatie importanta este ca reteaua momentan este fixa, neexistand un mod de adaugare de peers noi.
 
 ## Teste unitare
