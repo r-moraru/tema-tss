@@ -66,8 +66,8 @@
 - Testele au fost generate cu ChatGPT.
 - Testele au fost scrise pentru clasele (`Block`, `Blockchain`, `RpcServer` si `Node`).
 - Testele generate cu AI testeaza initiliazarea claselor, validitatea claselor create si implementarea metodelor.
-- De exemplu, 'TestCopyBlockchain' incearca sa verifice daca adaugarea unui bloc in copiia unui blockchain nu afecteaza varianta originala, insa testul adauga un block invalid la copie. Astfel blockchain-urile raman identice, iar assertion-ul pentru egalitate va pica.
 - O parte din teste nu compileaza si nu inteleg contextul aplicatiei.
+- De exemplu, 'TestCopyBlockchain' incearca sa verifice daca adaugarea unui bloc in copiia unui blockchain nu afecteaza varianta originala, insa testul adauga un block invalid la copie. Astfel blockchain-urile raman identice, iar assertion-ul pentru egalitate va pica.
 - Testele au un coverage limitat.
 - Testul pentru nod apeleaza metoda Run a nodului fara a avea un sistem de cancel, testul ruland la infinit.
 
