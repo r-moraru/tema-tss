@@ -52,7 +52,7 @@
 
 - Teste unitare au fost scrise pentru clasele de baza (`Block`, `Blockchain`, `RpcServer`)
 - Testele pentru `Block` (`block/block_test.go`) testeaza initializarea, minarea si validarea blocurilor.
-- Testele pentru `Blockchain` (`blockchain/blockchain.go`) testeaza adaugarea de blocuri noi in diferite circumstante (blocuri valide/invalide), si utilitarele (`GetBlockchainLength`, `GetLastBlock`, `Copy`)
+- Testele pentru `Blockchain` (`blockchain/blockchain_test.go`) testeaza adaugarea de blocuri noi in diferite circumstante (blocuri valide/invalide), si utilitarele (`GetBlockchainLength`, `GetLastBlock`, `Copy`)
 - Testele pentru `RpcServer` testeaza initializarea serverului, si implementarea metodelor (primirea de date valide/invalide)
 
 ## Teste de integrare
