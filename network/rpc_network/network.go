@@ -2,6 +2,8 @@ package rpc_network
 
 import (
 	"context"
+	"errors"
+	"math/rand"
 	"time"
 
 	"github.com/r-moraru/tema-TSS/block"
@@ -18,7 +20,28 @@ type RpcNetwork struct {
 	peers                 map[string]pb.RpcNetworkClient
 }
 
-func NewRpcNetwork(port int, id string, bootstrapPeerAddresses map[string]string) (*RpcNetwork, error) {
+func NewRpcNetworkClient(address string) (pb.RpcNetworkClient, error) {
+	conn, err := grpc.Dial(address)
+	if err != nil {
+		return nil, errors.New("Failed to dial.")
+	}
+	defer conn.Close()
+	c := pb.NewRpcNetworkClient(conn)
+	return c, nil
+}
+
+func BuildPeerMap(bootstrapPeerAddresses map[string]string) map[string]pb.RpcNetworkClient {
+	peers := make(map[string]pb.RpcNetworkClient)
+	for peerId, peerAddress := range bootstrapPeerAddresses {
+		c, err := NewRpcNetworkClient(peerAddress)
+		if err == nil {
+			peers[peerId] = c
+		}
+	}
+	return peers
+}
+
+func NewRpcNetwork(port int, id string, bootstrapPeerAddresses map[string]pb.RpcNetworkClient) (*RpcNetwork, error) {
 	rpcServer, stopRpcServerCallback, err := server.RunRpcServer(port)
 	if err != nil {
 		return nil, err
@@ -28,18 +51,9 @@ func NewRpcNetwork(port int, id string, bootstrapPeerAddresses map[string]string
 		rpcServer:             rpcServer,
 		stopRpcServerCallback: stopRpcServerCallback,
 		id:                    id,
-		peers:                 make(map[string]pb.RpcNetworkClient),
+		peers:                 bootstrapPeerAddresses,
 	}
 
-	for peerId, peerAddress := range bootstrapPeerAddresses {
-		conn, err := grpc.Dial(peerAddress)
-		if err != nil {
-			continue
-		}
-		defer conn.Close()
-		c := pb.NewRpcNetworkClient(conn)
-		rpcNetwork.peers[peerId] = c
-	}
 	return rpcNetwork, nil
 }
 
@@ -60,7 +74,12 @@ func (r *RpcNetwork) GetBlockchain() chan blockchain.Blockchain {
 }
 
 func (r *RpcNetwork) SendBlockchainRequest() {
+	k := rand.Intn(len(r.peers))
 	for _, peerClient := range r.peers {
+		if k != 0 {
+			k--
+			continue
+		}
 		ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
 		defer cancel()
 		peerClient.GetBlockchain(ctx, &pb.GetBlockchainMessage{PeerId: r.id})
@@ -97,7 +116,8 @@ func (r *RpcNetwork) SendBlock(b block.Block) {
 
 func (r *RpcNetwork) SendBlockchain(b blockchain.Blockchain) {
 	peerId, err := r.rpcServer.BlockchainRequestPeerIds.Get()
-	if err != nil {
+	_, peerFound := r.peers[peerId]
+	if err != nil || !peerFound {
 		return
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
@@ -118,7 +138,7 @@ func (r *RpcNetwork) SendBlockchain(b blockchain.Blockchain) {
 
 func (r *RpcNetwork) GetData() chan string {
 	dataChannel := make(chan string, 1)
-	if data, err := r.rpcServer.DataQueue.Get(); err != nil {
+	if data, err := r.rpcServer.DataQueue.Get(); err == nil {
 		dataChannel <- data
 	}
 	return dataChannel
